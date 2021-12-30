@@ -1,0 +1,44 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<div th:fragment="nav" class="navbar navbar-inverse">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+
+        <div class="navbar-collapse collapse" id="mobile_menu">
+          <ul class="nav navbar-nav">
+            <li><a href="../">Inicio</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li>
+              <form action="" class="navbar-form">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+
+            <li th:if="${usuarioLogueado}" ><a href="#"><span th:text="${usuarioLogueado.nombreUsuario}" class="glyphicon glyphicon-user"></span></a></li>
+            <li th:if="${usuarioLogueado}"><a href="../logout">Logout</a></li>
+
+            <li th:unless="${usuarioLogueado}"><a href="../login">Login</a></li>
+            <li th:unless="${usuarioLogueado}"><a href="../registrarse">Registrarse</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</html>
