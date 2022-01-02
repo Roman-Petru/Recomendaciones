@@ -11,20 +11,20 @@ import java.util.List;
 @Getter @Setter
 public class Usuario extends Persistente {
 
-    @Column(unique = true)
+    @Column(name = "nombreUsuario", unique = true)
     private String nombreUsuario;
 
-    @Column
+    @Column(name = "password")
     private String password;
 
-    @Column
+    @Column(name = "nombreCompleto")
     private String nombreCompleto;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private NivelAdmin nivel_admin;
 
-    @Transient
+    @OneToMany(mappedBy = "usuario")
     private List<Review> reviews = new ArrayList<>();
 
     public Usuario() {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Mostrar Contenido</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+<div class="col-sm-12">
+    <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">SERIES</h3>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Rank</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Puntaje</th>
+        <th scope="col">Tu Puntaje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="contenido : ${contenidos}">
+    <tr>
+        <th scope="row" th:text="${contenido.ranking}"></th>
+        <td ><a th:href="@{verContenido/{id}(id=${contenido.id})}" th:text="${contenido.nombre}"></a></td>
+        <td th:text="${contenido.puntaje}"></td>
+        <td th:text="${contenido.puntajeLogueado}"></td>
+    </tr>
+    </th:block>
+    </tbody>
+</table>
+
+</body>
+</html>

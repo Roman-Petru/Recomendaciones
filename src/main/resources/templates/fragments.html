@@ -8,16 +8,22 @@
         <div class="navbar-collapse collapse" id="mobile_menu">
           <ul class="nav navbar-nav">
             <li><a href="../">Inicio</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Gallery</a></li>
-            <li><a href="#">Contact Us</a></li>
+            <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">Agregar <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="../agregarGenero">Genero</a></li>
+                <li><a href="../agregarSerie">Serie</a></li>
+                <li><a href="../agregarLibro">Libro</a></li>
+              </ul>
+            </li>
+            <li><a href="../mejoresSeries">Mejores Series</a></li>
+            <li><a href="../mejoresLibros">Mejores Libros</a></li>
           </ul>
           <ul class="nav navbar-nav">
             <li>
-              <form action="" class="navbar-form">
+              <form action="busqueda" method="post" class="navbar-form">
                 <div class="form-group">
                   <div class="input-group">
-                    <input type="search" name="search" id="" placeholder="Search Anything Here..." class="form-control">
+                    <input type="search" name="busqueda" id="busqueda" placeholder="Buscar series o libros..." class="form-control">
                     <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
                   </div>
                 </div>
@@ -27,9 +33,8 @@
 
           <ul class="nav navbar-nav navbar-right">
 
-            <li th:if="${usuarioLogueado}" ><a href="#"><span th:text="${usuarioLogueado.nombreUsuario}" class="glyphicon glyphicon-user"></span></a></li>
+            <li th:if="${usuarioLogueado}" ><a href="../perfil"><span th:text="' ' + ${usuarioLogueado.nombreUsuario}" class="glyphicon glyphicon-user"></span></a></li>
             <li th:if="${usuarioLogueado}"><a href="../logout">Logout</a></li>
-
             <li th:unless="${usuarioLogueado}"><a href="../login">Login</a></li>
             <li th:unless="${usuarioLogueado}"><a href="../registrarse">Registrarse</a></li>
 
@@ -38,7 +43,7 @@
       </div>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Agregar Libro</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+
+<div class="wrapper">
+    <div class="col-sm-12">
+        <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">AGREGAR LIBRO</h3>
+    </div>
+
+    <div id="formContent">
+        <!-- Registro Form -->
+        <form action="agregarLibro" method="post">
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <input id="nombre" type="text" class="fadeIn second" name="nombre" placeholder="Ingrese Nombre de Serie" maxlength="255">
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <input id="usuario" type="number" class="fadeIn second validarUsuario" name="anioLanzamiento" placeholder="Ingrese año de lanzamiento" maxlength="4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <input id="autor" type="text" class="fadeIn third" name="autor" placeholder="Ingrese autor">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">Seleccionar generos</h3>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <select id="generos" style=" width: 250px;" name="generos" multiple="multiple">
+                        <option th:each="genero : ${generos}"
+                                th:value="${{genero.descripcion}}"
+                                th:text="${genero.descripcion}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <input id="btnRegistrarUsuario" type="submit" class="fadeIn fourth" value="Registrar Libro">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

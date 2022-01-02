@@ -5,6 +5,7 @@ import Roman.Recomendacion.Series.y.Libros.models.repositories.RepositorioUsuari
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +26,13 @@ public class InicioController {
         return "inicio";
     }
 
+    @RequestMapping(value = "mensaje/{mensaje}")
+    public String mensaje(@PathVariable String mensaje, Model model, HttpServletRequest request) {
+        this.cargarUsuarioLogueado(request, model);
+        model.addAttribute("mensaje", mensaje);
+        return "mensaje";
+    }
+
     @RequestMapping(value = "login")
     public String login(Model model, HttpServletRequest request) {
         this.cargarUsuarioLogueado(request, model);
@@ -40,16 +48,17 @@ public class InicioController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginPost(@RequestParam String nombreUsuario, @RequestParam String password , HttpServletRequest request) {
 
-        List<Usuario> usuario = this.repositorio.findBynombreUsuario(nombreUsuario);
 
-        if ((usuario.size() == 1) && (usuario.get(0).getPassword().equals(password)))
+        List<Usuario> listaUsuarios = this.repositorio.findBynombreUsuario(nombreUsuario);
+
+        if (listaUsuarios.size() == 1 &&
+                (listaUsuarios.get(0).getPassword().equals(password)))
         {
             HttpSession session = request.getSession();
-            session.setAttribute("userID", usuario.get(0).getId());
+            session.setAttribute("userID", listaUsuarios.get(0).getId());
             return "redirect:";
         }
-        return "redirect:login";
-
+        return "redirect:mensaje/Nombre de usuario o password incorrectos";
     }
 
     public void cargarUsuarioLogueado (HttpServletRequest request, Model model) {
@@ -58,6 +67,14 @@ public class InicioController {
             Usuario usuarioLogueado = repositorio.findById(new Integer(request.getSession().getAttribute("userID").toString())).get();
             model.addAttribute("usuarioLogueado", usuarioLogueado);
         }
+    }
+
+    public Usuario traerUsuarioLogueado (HttpServletRequest request) {
+
+        if(!request.getSession().isNew() && request.getSession().getAttribute("userID") != null) {
+            return repositorio.findById(new Integer(request.getSession().getAttribute("userID").toString())).get();
+        }
+        else return null;
     }
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Inicio</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+<h1 th:text="${contenido.nombre}" class="text-center text-black" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h1>
+
+<h2 style="margin-left: 15px; margin-top: 25px; margin-bottom: 25px;">Generos: </h2>
+
+<ul th:each="genero : ${contenido.generos}">
+  <li th:text="${genero.descripcion}"></li>
+</ul>
+
+<h3 th:text="'Año lanzamiento: ' + ${contenido.anioLanzamiento}" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h3>
+
+<div th:if="${tipo == 'contenido'}" >
+<h3 th:text="'Temporadas: ' + ${contenido.temporadas}" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h3>
+<h3 th:text="'Capitulos: ' + ${contenido.capitulos}" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h3>
+</div>
+<div th:if="${tipo == 'Libro'}" >
+  <h3 th:text="'Autor: ' + ${contenido.autor}" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h3>
+</div>
+<br>
+
+<button type="button" class="button">
+  <a th:href="@{../escribirCritica/{id}(id=${contenido.id})}" >Escribir crítica</a>
+</button>
+
+<h1 style="margin-left: 15px; margin-top: 25px; margin-bottom: 25px;">Reviews: </h1>
+
+<ul th:each="review : ${contenido.reviews}">
+  <li th:if="${review.usuario}" th:text="'Usuario: ' + ${review.usuario.nombreUsuario}"></li>
+  <li th:unless="${review.usuario}">Usuario: Anonimo</li>
+  <li th:text="'Puntaje: ' + ${review.putanje}"></li>
+  <li th:text="'Critica: ' + ${review.descripcion}"></li>
+</ul>
+
+</body>
+</html>

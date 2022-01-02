@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Agregar Serie</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+
+<div class="wrapper">
+  <div class="col-sm-12">
+    <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">AGREGAR GENERO</h3>
+  </div>
+
+  <div id="formContent">
+    <!-- Registro Form -->
+    <form action="agregarGenero" method="post">
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <input id="descripcion" type="text" class="fadeIn second" name="descripcion" placeholder="Ingrese Genero" maxlength="255">
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <input id="btnRegistrarUsuario" type="submit" class="fadeIn fourth" value="Registrar Genero">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

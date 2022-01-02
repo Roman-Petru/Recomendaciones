@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Perfil</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+
+<div class="wrapper">
+  <div class="col-sm-12">
+    <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">PERFIL DE USUARIO</h3>
+  </div>
+
+  <div id="formContent">
+    <!-- Registro Form -->
+    <form th:action="@{../modificarUser/__${usuarioLogueado.id}__}" method="post">
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label th:text="'Nombre usuario: ' + ${usuarioLogueado.nombreUsuario}"></label><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label for="nombre">Nombre completo: </label><br>
+          <input id="nombre" type="text" class="fadeIn second" name="nombreCompleto" th:value="${usuarioLogueado.nombreCompleto}" maxlength="255">
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label for="password">Nueva contraseña: </label><br>
+          <input id="password" type="password" class="fadeIn third" name="password" placeholder="Ingrese Contraseña">
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label for="oldPassword">Escribir antigua contraseña: </label><br>
+          <input id="oldPassword" type="password" class="fadeIn third" name="oldPassword" placeholder="Ingrese Contraseña">
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <input id="btnRegistrarUsuario" type="submit" class="fadeIn fourth" value="Modificar Usuario">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

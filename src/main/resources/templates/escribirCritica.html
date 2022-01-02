@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Escribir Critica</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+
+<div class="wrapper">
+  <div class="col-sm-12">
+    <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">ESCRIBIR CRITICA</h3>
+  </div>
+
+  <div id="formContent">
+    <!-- Registro Form -->
+    <form th:action="@{../escribirCritica/__${serieID}__}" method="post">
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label for="puntaje">Puntaje:</label>
+          <select id="puntaje" name="puntaje">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <textarea rows="5" cols="80" id="review" type="text" class="fadeIn second validarUsuario" name="review" placeholder="Escriba su review" maxlength="1000"> </textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <input id="btnRegistrarUsuario" type="submit" class="fadeIn fourth" value="Enviar critica">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
