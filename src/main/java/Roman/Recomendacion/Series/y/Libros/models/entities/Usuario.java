@@ -30,6 +30,9 @@ public class Usuario extends Persistente {
     @OneToMany(mappedBy = "usuario")
     private List<Review> reviews = new ArrayList<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private ParametrosRecomendacion parametrosRecomendacion;
+
     public Usuario() {
 
     }

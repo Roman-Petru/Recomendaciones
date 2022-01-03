@@ -9,6 +9,8 @@
 
 <h1 th:text="${contenido.nombre}" class="text-center text-black" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></h1>
 
+<p th:if="contenido.descripcion" th:text="${contenido.descripcion}" style="margin-left: 15px; margin-top: 25px; margin-bottom: 25px;"></p>
+
 <h2 style="margin-left: 15px; margin-top: 25px; margin-bottom: 25px;">Generos: </h2>
 
 <ul th:each="genero : ${contenido.generos}">

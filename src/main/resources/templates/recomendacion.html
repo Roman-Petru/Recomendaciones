@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Agregar Libro</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+
+<div class="wrapper">
+    <div class="col-sm-12">
+        <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">RECIBIR MAIL DE RECOMENDACIONES SEMANALES</h3>
+    </div>
+
+    <div id="formContent">
+        <form action="recomendacion" method="post">
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <label for="tipo">Tipo: </label>
+                    <select id="tipo" name="tipo">
+                        <option value="Serie">Serie</option>
+                        <option value="Libro">Libro</option>
+                        <option value="Ambos">Ambos</option>
+                    </select>
+                </div>
+            </div> <div class="row">
+            <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                <label for="puntajeMinimo">Puntaje minimo:</label>
+                <select id="puntajeMinimo" name="puntajeMinimo">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+            <div class="col-sm-12">
+                <h3 class="text-center text-black" style="margin-top: 25px; margin-bottom: 25px;">Seleccionar generos</h3>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <select id="generos" style=" width: 250px;" name="generos" multiple="multiple">
+                        <option th:each="genero : ${generos}"
+                                th:value="${{genero.descripcion}}"
+                                th:text="${genero.descripcion}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+                    <input id="btnRegistrarUsuario" type="submit" class="fadeIn fourth" value="Recibir recomendaciones">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <button th:if="${usuarioLogueado.parametrosRecomendacion}" type="button" class="button">
+        <a href="../desactivarRecomendacion" >Desactivar Recomendacion</a>
+    </button>
+</div>
+
+</body>
+</html>

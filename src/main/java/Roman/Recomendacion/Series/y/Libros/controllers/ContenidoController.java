@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ContenidoController {
@@ -96,11 +98,9 @@ public class ContenidoController {
         if (usuarioLogueado != null)
             libro.setCargadaPorUsuario(usuarioLogueado);
 
-        Iterable<GeneroDeContenido> generosTotales = repositorioGeneros.findAll();
-
         for (String genero : generos)
         {
-            for (GeneroDeContenido generoT : generosTotales)
+            for (GeneroDeContenido generoT : this.traerGeneros())
             {
                 if(genero.equals(generoT.getDescripcion()))
                     libro.agregarGenero(generoT);
@@ -121,5 +121,11 @@ public class ContenidoController {
             }
 
         return "verContenido";
+    }
+
+    public List<GeneroDeContenido> traerGeneros() {
+        List<GeneroDeContenido> listaGeneros = new ArrayList<>();
+        this.repositorioGeneros.findAll().forEach(listaGeneros::add);
+        return listaGeneros;
     }
 }

@@ -11,7 +11,10 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class ParametrosRecomendacion {
+public class ParametrosRecomendacion extends Persistente{
+
+    @Column
+    private Boolean activo;
 
     @Column
     private String tipoContenido;
@@ -20,9 +23,12 @@ public class ParametrosRecomendacion {
     private Integer minimoPuntaje;
 
     @ManyToMany
-    private List<GeneroDeContenido> generos = new ArrayList<>();
+    private List<GeneroDeContenido> generos;
 
     public ParametrosRecomendacion() {
     }
 
+    public void agregarGenero(GeneroDeContenido generoT) {
+        generos.add(generoT);
+    }
 }
