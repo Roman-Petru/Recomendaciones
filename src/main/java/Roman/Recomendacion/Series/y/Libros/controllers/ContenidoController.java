@@ -48,10 +48,11 @@ public class ContenidoController {
     }
 
     @RequestMapping(value = "agregarSerie", method = RequestMethod.POST)
-    public String agregarSeriePost(@RequestParam String nombre, @RequestParam Integer anioLanzamiento,
+    public String agregarSeriePost(@RequestParam String nombre, @RequestParam String descripcion, @RequestParam Integer anioLanzamiento,
                                    @RequestParam Integer temporadas, @RequestParam Integer capitulos, @RequestParam String[] generos, HttpServletRequest request) {
         Serie serie = new Serie();
         serie.setNombre(nombre);
+        serie.setDescripcion(descripcion);
         serie.setAnioLanzamiento(anioLanzamiento);
         serie.setTemporadas(temporadas);
         serie.setCapitulos(capitulos);
@@ -83,10 +84,11 @@ public class ContenidoController {
     }
 
     @RequestMapping(value = "agregarLibro", method = RequestMethod.POST)
-    public String agregarLibroPost(@RequestParam String nombre, @RequestParam Integer anioLanzamiento,
+    public String agregarLibroPost(@RequestParam String nombre, @RequestParam String descripcion, @RequestParam Integer anioLanzamiento,
                                    @RequestParam String autor, @RequestParam String[] generos, HttpServletRequest request) {
         Libro libro = new Libro();
         libro.setNombre(nombre);
+        libro.setDescripcion(descripcion);
         libro.setAnioLanzamiento(anioLanzamiento);
         libro.setAutor(autor);
 

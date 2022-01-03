@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Inicio</title>
+</head>
+
+<div th:replace="fragments :: nav"> </div>
+
+<div th:each="articulo : ${articulos}">
+
+<h1 th:text="${articulo.title}" class="text-center text-black" style="margin-left: 25px; margin-top: 50px; margin-bottom: 50px;"></h1>
+
+<p th:text="${articulo.description}" style="margin-left: 25px; margin-top: 25px; margin-bottom: 25px;"></p>
+
+    <br>
+
+<p style="margin-left: 25px; margin-top: 5px; margin-bottom: 25px;">Leer resto del artículo: </p>
+<a th:href="${articulo.url}" th:text="${articulo.url}" style="margin-left: 25px;"></a>
+
+    <br><br><br>
+
+</div>
+
+</body>
+</html>

@@ -19,6 +19,9 @@ public abstract class Contenido extends Persistente {
     @Column
     private String nombre;
 
+    @Column(columnDefinition="TEXT")
+    private String descripcion;
+
     @Column(name = "anioLanzamiento")
     private Integer anioLanzamiento;
 

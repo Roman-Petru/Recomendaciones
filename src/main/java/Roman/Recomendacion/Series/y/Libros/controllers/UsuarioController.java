@@ -26,7 +26,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "registrarse", method = RequestMethod.POST)
-    public String registrarsePost(@RequestParam String nombreCompleto, @RequestParam String nombreUsuario, @RequestParam String password ) {
+    public String registrarsePost(@RequestParam String nombreCompleto, @RequestParam String email, @RequestParam String nombreUsuario, @RequestParam String password ) {
 
         if (this.repositorio.findBynombreUsuario(nombreUsuario).size() > 0)
             return "redirect:mensaje/Ya existe el nombre de usuario";
@@ -35,6 +35,7 @@ public class UsuarioController {
         nuevo_user.setNivel_admin(NivelAdmin.COMUN);
         nuevo_user.setNombreUsuario(nombreUsuario);
         nuevo_user.setNombreCompleto(nombreCompleto);
+        nuevo_user.setEmail(email);
         nuevo_user.setPassword(password);
 
         this.repositorio.save(nuevo_user);
@@ -49,7 +50,7 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "modificarUser/{id}", method = RequestMethod.POST)
-    public String modificarUser(@PathVariable Integer id, @RequestParam String nombreCompleto, @RequestParam String password, @RequestParam String oldPassword) {
+    public String modificarUser(@PathVariable Integer id, @RequestParam String nombreCompleto, @RequestParam String email, @RequestParam String password, @RequestParam String oldPassword) {
         if (!this.repositorio.findById(id).isPresent())
             return "redirect:../mensaje/No existe el usuario";
 
@@ -60,6 +61,7 @@ public class UsuarioController {
 
         userAModificar.setNombreCompleto(nombreCompleto);
         userAModificar.setPassword(password);
+        userAModificar.setEmail(email);
         this.repositorio.save(userAModificar);
         return "redirect:../mensaje/Usuario modificado";
     }

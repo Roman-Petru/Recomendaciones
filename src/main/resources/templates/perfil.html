@@ -29,6 +29,12 @@
       </div>
       <div class="row">
         <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
+          <label for="email">Email: </label><br>
+          <input id="email" type="email" class="fadeIn second" name="email" th:value="${usuarioLogueado.email}" maxlength="255">
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center text-black" style="margin-top: 25px; margin-bottom: 5px;">
           <label for="password">Nueva contraseña: </label><br>
           <input id="password" type="password" class="fadeIn third" name="password" placeholder="Ingrese Contraseña">
         </div>

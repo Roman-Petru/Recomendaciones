@@ -1,7 +1,6 @@
 package Roman.Recomendacion.Series.y.Libros.controllers;
 
 import Roman.Recomendacion.Series.y.Libros.models.entities.Contenido;
-import Roman.Recomendacion.Series.y.Libros.models.entities.Review;
 import Roman.Recomendacion.Series.y.Libros.models.entities.Usuario;
 import Roman.Recomendacion.Series.y.Libros.models.repositories.RepositorioContenidos;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller

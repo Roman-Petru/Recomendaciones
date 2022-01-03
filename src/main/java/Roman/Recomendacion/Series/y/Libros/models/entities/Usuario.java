@@ -20,6 +20,9 @@ public class Usuario extends Persistente {
     @Column(name = "nombreCompleto")
     private String nombreCompleto;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private NivelAdmin nivel_admin;
