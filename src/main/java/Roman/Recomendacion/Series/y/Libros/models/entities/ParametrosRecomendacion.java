@@ -5,8 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,7 +22,7 @@ public class ParametrosRecomendacion extends Persistente{
     @Column
     private Integer minimoPuntaje;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<GeneroDeContenido> generos;
 
     public ParametrosRecomendacion() {

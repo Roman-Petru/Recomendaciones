@@ -1,5 +1,6 @@
 package Roman.Recomendacion.Series.y.Libros.controllers;
 
+import Roman.Recomendacion.Series.y.Libros.models.entities.Contenido;
 import Roman.Recomendacion.Series.y.Libros.models.entities.Review;
 import Roman.Recomendacion.Series.y.Libros.models.entities.Usuario;
 import Roman.Recomendacion.Series.y.Libros.models.repositories.RepositorioContenidos;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ReviewController {
@@ -41,14 +43,20 @@ public class ReviewController {
 
         if (!this.repositorioContenidos.findById(id).isPresent())
             return "redirect:../mensaje/No existe este contenido";
+
+        Contenido contenido = this.repositorioContenidos.findById(id).get();
+
+        Usuario usuarioLogueado = this.inicioController.traerUsuarioLogueado(request);
         Review nuevaReview = new Review();
+
+        if (usuarioLogueado != null){
+            List<Review> reviews = this.repositorioReviews.findBycontenido(contenido);
+            nuevaReview = reviews.stream().filter(r -> r.getUsuario().getId() == usuarioLogueado.getId()).findAny().orElse(new Review());
+            nuevaReview.setUsuario(usuarioLogueado);}
+
         nuevaReview.setPutanje(puntaje);
         nuevaReview.setDescripcion(review);
-        nuevaReview.setContenido(this.repositorioContenidos.findById(id).get());
-
-        Usuario user = this.inicioController.traerUsuarioLogueado(request);
-        if (user != null)
-            nuevaReview.setUsuario(user);
+        nuevaReview.setContenido(contenido);
 
         this.repositorioReviews.save(nuevaReview);
         return "redirect:../mensaje/Critica enviada";

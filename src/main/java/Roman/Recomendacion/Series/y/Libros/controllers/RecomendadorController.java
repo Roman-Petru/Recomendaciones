@@ -1,10 +1,9 @@
 package Roman.Recomendacion.Series.y.Libros.controllers;
 
-import Roman.Recomendacion.Series.y.Libros.models.entities.GeneroDeContenido;
-import Roman.Recomendacion.Series.y.Libros.models.entities.ParametrosRecomendacion;
-import Roman.Recomendacion.Series.y.Libros.models.entities.Usuario;
+import Roman.Recomendacion.Series.y.Libros.models.entities.*;
 import Roman.Recomendacion.Series.y.Libros.models.repositories.RepositorioUsuarios;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class RecomendadorController {
@@ -44,18 +44,18 @@ public class RecomendadorController {
         if (parametros == null)
             user.setParametrosRecomendacion(new ParametrosRecomendacion());
 
-        parametros.setActivo(Boolean.TRUE);
-        parametros.setMinimoPuntaje(puntajeMinimo);
-        parametros.setTipoContenido(tipo);
+        user.getParametrosRecomendacion().setActivo(Boolean.TRUE);
+        user.getParametrosRecomendacion().setMinimoPuntaje(puntajeMinimo);
+        user.getParametrosRecomendacion().setTipoContenido(tipo);
 
-        parametros.setGeneros(new ArrayList<>());
+        user.getParametrosRecomendacion().setGeneros(new ArrayList<>());
 
         for (String genero : generos)
         {
             for (GeneroDeContenido generoT : this.contenidoController.traerGeneros())
             {
                 if(genero.equals(generoT.getDescripcion()))
-                    parametros.agregarGenero(generoT);
+                    user.getParametrosRecomendacion().agregarGenero(generoT);
             }
         }
 
@@ -72,7 +72,17 @@ public class RecomendadorController {
             return "redirect:mensaje/No hay usuario logueado";
 
         user.getParametrosRecomendacion().setActivo(Boolean.FALSE);
+        this.repositorioUsuarios.save(user);
 
         return "redirect:mensaje/Se han desactivado las recomendaciones semanales!";
+    }
+
+    @Scheduled(fixedDelayString = "PT10M")
+    public void recomendador(){
+        List<Contenido> listaContenidos = this.contenidoController.traerContenidos();
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        this.repositorioUsuarios.findAll().forEach(listaUsuarios::add);
+        Recomendador recomendador = new Recomendador();
+        recomendador.recomendar(listaContenidos, listaUsuarios);
     }
 }

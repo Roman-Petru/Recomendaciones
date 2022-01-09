@@ -1,5 +1,7 @@
 package Roman.Recomendacion.Series.y.Libros.models.entities;
 
+import Roman.Recomendacion.Series.y.Libros.models.entities.notificador.JavaGMailAdapter;
+import Roman.Recomendacion.Series.y.Libros.models.entities.notificador.Mensajeable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,5 +37,11 @@ public class Usuario extends Persistente {
 
     public Usuario() {
 
+    }
+
+    public void enviarMail(Mensajeable mensajeable){
+        mensajeable.setDestinatario(email);
+        JavaGMailAdapter gMailAdapter = new JavaGMailAdapter();
+        gMailAdapter.enviar(mensajeable);
     }
 }

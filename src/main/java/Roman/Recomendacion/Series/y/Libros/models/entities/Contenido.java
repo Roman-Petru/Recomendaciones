@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 
@@ -32,10 +34,11 @@ public abstract class Contenido extends Persistente {
     @Column(name = "fechaCarga")
     private Date fechaCarga;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<GeneroDeContenido> generos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "contenido")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contenido")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Review> reviews = new ArrayList<>();
 
     @Transient

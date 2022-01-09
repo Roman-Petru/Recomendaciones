@@ -128,4 +128,10 @@ public class ContenidoController {
         this.repositorioGeneros.findAll().forEach(listaGeneros::add);
         return listaGeneros;
     }
+
+    public List<Contenido> traerContenidos() {
+        List<Contenido> listaContenidos = new ArrayList<>();
+        this.repositorioContenidos.findAll().forEach(listaContenidos::add);
+        return listaContenidos;
+    }
 }
